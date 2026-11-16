@@ -1,0 +1,151 @@
+{
+  "project": "Sentinel OSINT — Advanced All-in-One Intelligence Platform",
+  "version": "2.0.0",
+  "lastUpdated": "2026-10-26T21:22:15+06:00",
+  "tasks": [
+    {
+      "id": "PHASE-0-ARCH",
+      "description": "Discovery, reference verification, architecture, feature matrix, integration plan, and security model documentation",
+      "priority": "P0",
+      "status": "tested",
+      "relatedFiles": [
+        "README.md",
+        "ARCHITECTURE.md",
+        "FEATURE_MATRIX.md",
+        "INTEGRATIONS.md",
+        "SECURITY_MODEL.md",
+        "IMPLEMENTATION_PLAN.md",
+        "API_KEYS_SETUP.md",
+        "TESTING.md",
+        "DEPLOYMENT.md",
+        "LIMITATIONS.md"
+      ],
+      "dependencies": [],
+      "tests": ["tests/api-routes-and-ui.test.ts"],
+      "blockingIssue": null
+    },
+    {
+      "id": "PHASE-1-FOUNDATION",
+      "description": "Next.js App Router scaffold, 19-table Supabase PostgreSQL + RLS schema, dual-mode persistence repository, authentication, session security, and 16-module responsive dashboard shell",
+      "priority": "P0",
+      "status": "tested",
+      "relatedFiles": [
+        "supabase/migrations/0001_sentinel_osint_schema.sql",
+        "src/types/osint.ts",
+        "src/lib/db/repository.ts",
+        "src/lib/auth/session.ts",
+        "src/app/api/auth/route.ts",
+        "src/components/auth/AuthScreen.tsx",
+        "src/components/workspace/SentinelWorkspace.tsx"
+      ],
+      "dependencies": ["PHASE-0-ARCH"],
+      "tests": [
+        "tests/security-and-auth.test.ts",
+        "tests/api-routes-and-ui.test.ts"
+      ],
+      "blockingIssue": null
+    },
+    {
+      "id": "PHASE-2-CORE-MVP",
+      "description": "SSRF guard, input validation, Universal Investigation Engine, live DNS/DoH, RDAP, IP intel, TLS handshake inspector, HTTP security headers, and JSON/CSV/STIX/PDF exports",
+      "priority": "P0",
+      "status": "tested",
+      "relatedFiles": [
+        "src/lib/security/ssrf-guard.ts",
+        "src/lib/validation/schemas.ts",
+        "src/lib/engine/orchestrator.ts",
+        "src/lib/providers/dns-provider.ts",
+        "src/lib/providers/rdap-provider.ts",
+        "src/lib/providers/tls-provider.ts",
+        "src/lib/providers/http-provider.ts",
+        "src/lib/reports/exporter.ts",
+        "src/app/api/investigations/route.ts",
+        "src/app/api/investigations/export/route.ts"
+      ],
+      "dependencies": ["PHASE-1-FOUNDATION"],
+      "tests": [
+        "tests/ssrf-and-url.test.ts",
+        "tests/osint-providers.test.ts",
+        "tests/investigation-engine.test.ts",
+        "tests/file-and-exports.test.ts"
+      ],
+      "blockingIssue": null
+    },
+    {
+      "id": "PHASE-3-INTEGRATIONS",
+      "description": "Email posture & HIBP adapter, public profile discovery (GitHub/GitLab/Keybase/HN/Gravatar), libphonenumber-js, CT logs (crt.sh/CertSpotter), RIPEstat BGP, Shodan InternetDB, abuse.ch (URLhaus/ThreatFox/MalwareBazaar), VirusTotal, AbuseIPDB, Google Safe Browsing, Wayback Machine CDX",
+      "priority": "P1",
+      "status": "tested",
+      "relatedFiles": [
+        "src/lib/providers/identity-provider.ts",
+        "src/lib/providers/ct-provider.ts",
+        "src/lib/providers/network-provider.ts",
+        "src/lib/providers/threat-provider.ts",
+        "src/lib/providers/org-and-archive-provider.ts",
+        "src/lib/providers/registry.ts"
+      ],
+      "dependencies": ["PHASE-2-CORE-MVP"],
+      "tests": ["tests/osint-providers.test.ts"],
+      "blockingIssue": "Keyed commercial providers (HIBP, VirusTotal, AbuseIPDB, Google Safe Browsing, Shodan Full, SecurityTrails, Brave Search) return not_configured until API keys are supplied in .env.local; all 14 standards/public providers operate live."
+    },
+    {
+      "id": "PHASE-4-WORKSPACE",
+      "description": "Case management workspace, React Flow Entity Relationship Graph, Evidence Library, Image EXIF (with GPS redaction) & PDF metadata inspector, Perceptual Hashing, Organization LEI & security.txt intelligence, Report Builder",
+      "priority": "P1",
+      "status": "tested",
+      "relatedFiles": [
+        "src/lib/security/file-validator.ts",
+        "src/app/api/files/inspect/route.ts",
+        "src/app/api/cases/route.ts",
+        "src/app/api/findings/route.ts",
+        "src/app/api/ai-summary/route.ts",
+        "src/components/graph/RelationshipGraph.tsx"
+      ],
+      "dependencies": ["PHASE-3-INTEGRATIONS"],
+      "tests": [
+        "tests/file-and-exports.test.ts",
+        "tests/api-routes-and-ui.test.ts"
+      ],
+      "blockingIssue": null
+    },
+    {
+      "id": "PHASE-5-SECURITY-QA",
+      "description": "SSRF regression tests, tenant authorization tests, CSV formula injection tests, file upload security tests, unknown hash classification tests, and full production build verification",
+      "priority": "P0",
+      "status": "tested",
+      "relatedFiles": [
+        "tests/ssrf-and-url.test.ts",
+        "tests/security-and-auth.test.ts",
+        "tests/osint-providers.test.ts",
+        "tests/file-and-exports.test.ts",
+        "tests/investigation-engine.test.ts",
+        "tests/api-routes-and-ui.test.ts"
+      ],
+      "dependencies": ["PHASE-4-WORKSPACE"],
+      "tests": [
+        "tests/ssrf-and-url.test.ts",
+        "tests/security-and-auth.test.ts",
+        "tests/osint-providers.test.ts",
+        "tests/file-and-exports.test.ts",
+        "tests/investigation-engine.test.ts",
+        "tests/api-routes-and-ui.test.ts"
+      ],
+      "blockingIssue": null
+    },
+    {
+      "id": "PHASE-6-DEPLOYMENT",
+      "description": "Vercel deployment configuration, Supabase migration readiness, standalone worker script, and operational health checks",
+      "priority": "P1",
+      "status": "tested",
+      "relatedFiles": [
+        "vercel.json",
+        "worker/index.ts",
+        "src/app/api/health/route.ts",
+        "supabase/migrations/0001_sentinel_osint_schema.sql"
+      ],
+      "dependencies": ["PHASE-5-SECURITY-QA"],
+      "tests": ["tests/api-routes-and-ui.test.ts"],
+      "blockingIssue": null
+    }
+  ]
+}
