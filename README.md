@@ -1,8 +1,16 @@
 # Sentinel OSINT — Advanced All-in-One Intelligence Platform
 
-**Sentinel OSINT** is a production-oriented, defense-in-depth Open Source Intelligence (OSINT) and defensive threat-intelligence workspace built with **Next.js App Router, TypeScript, Tailwind CSS, React Flow (`@xyflow/react`), TanStack Table, Recharts, Zod, and Supabase PostgreSQL**.
+[![Live Demo on Vercel](https://img.shields.io/badge/Live_Production-sentinel--osint--chi.vercel.app-06b6d4?style=for-the-badge&logo=vercel)](https://sentinel-osint-chi.vercel.app)
+[![GitHub Repository](https://img.shields.io/badge/GitHub-PrattayDev%2Fsentinel--osint-181717?style=for-the-badge&logo=github)](https://github.com/PrattayDev/sentinel-osint)
+[![Automated Tests](https://img.shields.io/badge/Vitest_Suite-38%2F38_Passing-10b981?style=for-the-badge&logo=vitest)](./TESTING.md)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.6_Strict-3178c6?style=for-the-badge&logo=typescript)](./tsconfig.json)
 
-It consolidates 90+ investigative capabilities across **9 intelligence domains** with strict provenance tracking, uncertainty preservation, SSRF protection, user/workspace tenant isolation, interactive entity relationship graphs, case management, and formal multi-format reporting (PDF, JSON, formula-safe CSV, and OASIS STIX 2.1).
+**Live Deployment:** [https://sentinel-osint-chi.vercel.app](https://sentinel-osint-chi.vercel.app)  
+**GitHub Repository:** [https://github.com/PrattayDev/sentinel-osint](https://github.com/PrattayDev/sentinel-osint)
+
+**Sentinel OSINT** is a production-oriented, defense-in-depth Open Source Intelligence (OSINT) and defensive threat-intelligence workspace built with **Next.js 14 App Router, TypeScript, Tailwind CSS, React Flow (`@xyflow/react`), TanStack Table, Recharts, Zod, and Supabase PostgreSQL**.
+
+It consolidates 90+ investigative capabilities across **9 intelligence domains** with strict provenance tracking, uncertainty preservation, SSRF & DNS-rebinding protection, user/workspace tenant isolation, interactive entity relationship graphs, case management, and formal multi-format reporting (PDF, JSON, formula-safe CSV, and OASIS STIX 2.1).
 
 ---
 
